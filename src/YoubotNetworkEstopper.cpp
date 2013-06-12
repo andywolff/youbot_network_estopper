@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 
     if (bad) {
 
-      int readValue;
+/*      int readValue;
       static const int numberOfArmJoints = 5;
       static const int numberOfGripperJoints = 2;
 
@@ -124,11 +124,15 @@ int main(int argc, char **argv)
       cmd_vel.linear.x=0; cmd_vel.linear.y=0; cmd_vel.linear.z=0;
       cmd_vel.angular.x=0; cmd_vel.angular.y=0; cmd_vel.angular.z=0;
       cmd_vel_pub.publish(cmd_vel);
-
+*/
       //kill motors
       std_srvs::Empty empty;
       ros::service::call("arm_1/switchOffMotors", empty);
       ros::service::call("base/switchOffMotors", empty);
+
+      ros::spinOnce();
+      ros::shutdown();
+      return 0;
 
     }
 

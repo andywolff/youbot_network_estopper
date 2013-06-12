@@ -16,7 +16,7 @@ find_package(Boost REQUIRED COMPONENTS thread date_time filesystem system regex)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+#  INCLUDE_DIRS include
 # LIBRARIES YouBotDriver soem
   CATKIN_DEPENDS rosconsole
 )
@@ -27,7 +27,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 include_directories(
-  include
+#  include
   ${catkin_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
 )
@@ -40,10 +40,10 @@ add_definitions(-DUSE_ROS_LOGGING)
 set(CMAKE_BUILD_TYPE Release)
 
 #copy header files
-install(DIRECTORY include/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
-)
+#install(DIRECTORY include/
+#  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#  FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
+#)
 
 add_executable(youbot_network_estopper src/YoubotNetworkEstopper.cpp)
 target_link_libraries(youbot_network_estopper ${catkin_LIBRARIES})
