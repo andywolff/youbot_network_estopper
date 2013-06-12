@@ -2,6 +2,7 @@
 
 #include "ros/ros.h"
 #include "std_msgs/Bool.h"
+#include "std_srvs/Empty.h"
 #include "brics_actuator/JointPositions.h"
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/Twist.h"
@@ -124,9 +125,14 @@ int main(int argc, char **argv)
       cmd_vel.angular.x=0; cmd_vel.angular.y=0; cmd_vel.angular.z=0;
       cmd_vel_pub.publish(cmd_vel);
 
+      //kill motors
+      std_srvs::Empty empty;
+      ros::service::call("arm_1/switchOffMotors", empty);
+      ros::service::call("base/switchOffMotors", empty);
+
     }
 
-    if (has_received_heartbeat) {
+    if (has_received_heartbeat && !bad) {
       heartbeat_timeout++;
       if (heartbeat_timeout>heartbeat_timeout_max)
       {
